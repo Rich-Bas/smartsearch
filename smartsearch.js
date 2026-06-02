@@ -311,6 +311,8 @@
   }
 
   function initComponent(component) {
+    if (component.dataset.smartsearchInit) return;
+    component.dataset.smartsearchInit = '1';
     console.log('initComponent', component);
     const elements = resolveElements(component);
     if (!elements) return;
