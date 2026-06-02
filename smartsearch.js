@@ -332,9 +332,9 @@
   }
 
   function run() {
-    console.log('smartsearch run', document.readyState);
-    document.querySelectorAll(SELECTORS.component).forEach(initComponent);
-  }
+  console.log('run called, stack:', new Error().stack);
+  document.querySelectorAll(SELECTORS.component).forEach(initComponent);
+}
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
