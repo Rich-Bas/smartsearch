@@ -255,10 +255,11 @@
       return true;
     }
 
-    function close() {
-      component.classList.remove(CLASS.searching, CLASS.open);
-      input.setAttribute('aria-expanded', 'false');
-    }
+   function close() {
+  component.classList.remove(CLASS.searching, CLASS.open);
+  input.setAttribute('aria-expanded', 'false');
+  input.value = '';
+}
 
     function closeAndBlur() {
       close();
