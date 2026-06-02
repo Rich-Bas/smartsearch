@@ -125,7 +125,9 @@
   function resolveElements(component) {
     const container = component.closest('.nav-search') || component;
     const input = container.querySelector(SELECTORS.input);
-    const results = component.querySelector(SELECTORS.results);
+    const results = component.classList.contains('search-results') 
+  ? component 
+  : component.querySelector(SELECTORS.results);
     if (!input || !results) return null;
     return {
       input,
