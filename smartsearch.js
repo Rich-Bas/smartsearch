@@ -55,8 +55,7 @@
   function scoreToken(entry, token) {
     const titleIndex = entry.title.indexOf(token);
     if (titleIndex !== -1) {
-      const boundaryBonus = startsAtWordBoundary(entry.title, titleIndex)
-        ? SCORE.wordBoundaryBonus : 0;
+      const boundaryBonus = startsAtWordBoundary(entry.title, titleIndex) ? SCORE.wordBoundaryBonus : 0;
       return SCORE.titleMatch + boundaryBonus;
     }
     if (entry.text.includes(token)) return SCORE.textMatch;
@@ -125,16 +124,12 @@
   function resolveElements(component) {
     const container = component.closest('.nav-search') || component;
     const input = container.querySelector(SELECTORS.input);
-    const results = component.classList.contains('search-results') 
-  ? component 
-  : component.querySelector(SELECTORS.results);
+    const results = component.querySelector(SELECTORS.results);
+    const button = container.querySelector(SELECTORS.button);
+    const form = container.querySelector(SELECTORS.form);
+    console.log('resolveElements', { input, results, button, form });
     if (!input || !results) return null;
-    return {
-      input,
-      results,
-      form: container.querySelector(SELECTORS.form),
-      button: container.querySelector(SELECTORS.button),
-    };
+    return { input, results, form, button };
   }
 
   function ensureComponentId(component) {
@@ -287,6 +282,7 @@
   }
 
   function bindToggleButton(component, button, input) {
+    console.log('bindToggleButton', { button, hasAttr: component.hasAttribute(SETTINGS.toggleAttribute) });
     if (!button) return;
     if (!component.hasAttribute(SETTINGS.toggleAttribute)) {
       button.addEventListener('click', preventDefault);
@@ -302,6 +298,7 @@
   }
 
   function bindEvents(component, elements, controller) {
+    console.log('bindEvents', elements);
     const { input, form, button } = elements;
     const scheduleSearch = debounceToAnimationFrame(controller.search);
     if (form) form.addEventListener('submit', preventDefault);
@@ -314,6 +311,7 @@
   }
 
   function initComponent(component) {
+    console.log('initComponent', component);
     const elements = resolveElements(component);
     if (!elements) return;
     ensureComponentId(component);
@@ -332,6 +330,7 @@
   }
 
   function run() {
+    console.log('smartsearch run', document.readyState);
     document.querySelectorAll(SELECTORS.component).forEach(initComponent);
   }
 
