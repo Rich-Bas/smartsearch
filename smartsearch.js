@@ -306,8 +306,10 @@
     input.addEventListener('keydown', (event) => handleKeydown(event, controller));
     bindToggleButton(component, button, input);
     document.addEventListener('click', (event) => {
-      if (!component.contains(event.target)) controller.close();
-    });
+  if (!component.contains(event.target) && !event.target.closest(SELECTORS.button)) {
+    controller.close();
+  }
+});
   }
 
   function initComponent(component) {
