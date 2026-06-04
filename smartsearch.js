@@ -127,7 +127,6 @@
     const results = component.querySelector(SELECTORS.results);
     const button = container.querySelector(SELECTORS.button);
     const form = container.querySelector(SELECTORS.form);
-    console.log('resolveElements', { input, results, button, form });
     if (!input || !results) return null;
     return { input, results, form, button };
   }
@@ -283,7 +282,6 @@
   }
 
   function bindToggleButton(component, button, input) {
-    console.log('bindToggleButton', { button, hasAttr: component.hasAttribute(SETTINGS.toggleAttribute) });
     if (!button) return;
     if (!component.hasAttribute(SETTINGS.toggleAttribute)) {
       button.addEventListener('click', preventDefault);
@@ -299,7 +297,6 @@
   }
 
   function bindEvents(component, elements, controller) {
-    console.log('bindEvents', elements);
     const { input, form, button } = elements;
     const scheduleSearch = debounceToAnimationFrame(controller.search);
     if (form) form.addEventListener('submit', preventDefault);
@@ -318,7 +315,6 @@
   function initComponent(component) {
     if (component.dataset.smartsearchInit) return;
     component.dataset.smartsearchInit = '1';
-    console.log('initComponent', component);
     const elements = resolveElements(component);
     if (!elements) return;
     ensureComponentId(component);
@@ -337,7 +333,6 @@
   }
 
   function run() {
-  console.log('run called, stack:', new Error().stack);
   document.querySelectorAll(SELECTORS.component).forEach(initComponent);
 }
 
