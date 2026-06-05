@@ -122,14 +122,14 @@
   }
 
   function resolveElements(component) {
-    const container = component.closest('.nav-search') || component;
-    const input = container.querySelector(SELECTORS.input);
-    const results = component.querySelector(SELECTORS.results);
-    const button = container.querySelector(SELECTORS.button);
-    const form = container.querySelector(SELECTORS.form);
-    if (!input || !results) return null;
-    return { input, results, form, button };
-  }
+  const container = component.closest('.nav-search') || component.closest('.hero-search-wrapper') || component;
+  const input = container.querySelector(SELECTORS.input);
+  const results = component.querySelector(SELECTORS.results);
+  const button = container.querySelector(SELECTORS.button);
+  const form = container.querySelector(SELECTORS.form);
+  if (!input || !results) return null;
+  return { input, results, form, button };
+}
 
   function ensureComponentId(component) {
     if (!component.id) component.id = 'smartsearch-' + randomId();
